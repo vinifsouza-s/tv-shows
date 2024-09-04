@@ -1,0 +1,26 @@
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .icon {
+    font-size: 1.5rem;
+    color: var(--icon-color);
+    transition: color 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .react-switch {
+    display: flex;
+    align-items: center;
+
+    .react-switch-handle {
+      border-radius: 50%;
+    }
+
+    .react-switch-slider {
+      border-radius: 20px;
+      background: var(--border-color);
+    }
+  }
+}
