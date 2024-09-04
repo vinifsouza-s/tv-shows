@@ -1,0 +1,32 @@
+@import "../../../styles/themes";
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  input {
+    flex: 1;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 4px;
+    margin-right: 8px;
+    color: var(--text-color);
+    background-color: var(--primary-color);
+  }
+
+  button {
+    padding: 8px 16px;
+    font-size: 16px;
+    border: none;
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--primary-color);
+    }
+  }
+}
