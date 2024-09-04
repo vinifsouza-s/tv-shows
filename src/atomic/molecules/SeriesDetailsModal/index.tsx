@@ -31,7 +31,7 @@ const SeriesDetailsModal: React.FC<SeriesDetailsModalProps> = ({ isOpen, onClose
     if (!series) return null;
 
     const getEpisodesForSeason = (season: number): EpisodeProps[] => {
-        return series._embedded.episodes.filter((episode: EpisodeProps) => episode.season === season);
+        return series._embedded?.episodes.filter((episode: EpisodeProps) => episode.season === season);
     };
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
@@ -43,7 +43,7 @@ const SeriesDetailsModal: React.FC<SeriesDetailsModalProps> = ({ isOpen, onClose
                     <div className='sumary'>
                         <p>{stripHtmlTags(series.summary)}</p>
                         <p><strong>Premiere:</strong> {series.premiered}</p>
-                        <p><strong>Genres:</strong> {series.genres.join(', ')}</p>
+                        <p><strong>Genres:</strong> {series.genres?.join(', ')}</p>
                     </div>
                 </div>
 
@@ -62,7 +62,7 @@ const SeriesDetailsModal: React.FC<SeriesDetailsModalProps> = ({ isOpen, onClose
                 </div>
 
                 <div className="episodes-list">
-                    {getEpisodesForSeason(selectedSeason).map((episode: any) => (
+                    {getEpisodesForSeason(selectedSeason)?.map((episode: any) => (
                         <EpisodeItemCard key={episode.id} episode={episode} />
                     ))}
                 </div>

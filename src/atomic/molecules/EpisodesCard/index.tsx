@@ -12,7 +12,7 @@ const EpisodeItemCard: React.FC<EpisodeItemProps> = ({ episode }) => {
 
     return (
         <div className="episode-item">
-            <img src={episode.image.medium} alt={episode.name} />
+            <img src={episode.image?.medium} alt={episode.name} />
             <div className="episode-info">
                 <h4>{episode.season}-{episode.number}{'  '}{episode.name}</h4>
                 <p>{stripHtmlTags(episode.summary)}</p>

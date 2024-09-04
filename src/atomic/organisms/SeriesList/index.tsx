@@ -14,6 +14,8 @@ const SeriesList: React.FC = () => {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
 
+
+
     return (
         <div className="container">
             <div className="series-list">
