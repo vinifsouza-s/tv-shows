@@ -1,0 +1,17 @@
+// src/components/SeriesItem.scss
+
+.series-item {
+  width: 100%;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+
+  img {
+    border-radius: 1rem;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    z-index: 1;
+  }
+}

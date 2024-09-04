@@ -1,0 +1,26 @@
+.episode-item {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #ffffffbe;
+  box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
+  padding: 1rem;
+  border-radius: 4px;
+
+  img {
+    margin-right: 10px;
+    border-radius: 4px;
+    max-width: 300px;
+  }
+
+  .episode-info {
+    h4 {
+      margin: 0;
+    }
+
+    p {
+      margin: 5px 0;
+    }
+  }
+}
