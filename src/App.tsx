@@ -1,12 +1,27 @@
-import React from 'react';
 
+import React, { useState } from 'react';
 import './styles/global.scss';
 import RoutesConfig from './routes';
+import ThemeToggle from './atomic/atoms/ThemeToggle';
+
 
 const App: React.FC = () => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const toggleTheme = () => {
+    setIsDarkMode(prev => !prev);
+  };
+
   return (
-    <div className="app">
-      <RoutesConfig />
+    <div className={isDarkMode ? 'theme-dark' : 'theme-light'}>
+      <div className="app-container">
+        <header className="app-header">
+          <ThemeToggle isDarkMode={isDarkMode} onToggle={toggleTheme} />
+        </header>
+        <main>
+          <RoutesConfig />
+        </main>
+      </div>
     </div>
   );
 };
