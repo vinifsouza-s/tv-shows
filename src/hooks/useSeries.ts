@@ -1,8 +1,9 @@
+// hooks/useSeries.ts
 import { useState, useEffect } from "react";
 import { fetchSeries, fetchSeriesDetails } from "../services/api";
 import { SeriesProps } from "../types/Series";
 
-export const useSeries = () => {
+export const useSeries = (searchQuery: string) => {
   const [series, setSeries] = useState<SeriesProps[]>([]);
   const [selectedSeries, setSelectedSeries] = useState<SeriesProps | null>(
     null
@@ -13,7 +14,7 @@ export const useSeries = () => {
   useEffect(() => {
     const getSeries = async () => {
       try {
-        const data = await fetchSeries();
+        const data = await fetchSeries(searchQuery);
         setSeries(data);
       } catch (error) {
         setError(`Error fetching series: ${error}`);
@@ -21,8 +22,9 @@ export const useSeries = () => {
         setLoading(false);
       }
     };
+
     getSeries();
-  }, []);
+  }, [searchQuery]);
 
   const handleSeriesClick = async (id: number) => {
     try {
