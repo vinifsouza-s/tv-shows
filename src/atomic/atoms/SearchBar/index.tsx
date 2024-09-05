@@ -1,22 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles.scss';
 
 interface SearchBarProps {
+    inputValue: string;
     onSearch: (query: string) => void;
     onClear: () => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onClear }) => {
-    const [inputValue, setInputValue] = useState('');
+const SearchBar: React.FC<SearchBarProps> = ({ inputValue, onSearch, onClear }) => {
+    const [localValue, setLocalValue] = useState(inputValue);
+    const [debouncedValue, setDebouncedValue] = useState(inputValue);
+
+    useEffect(() => {
+        setLocalValue(inputValue);
+    }, [inputValue]);
+
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebouncedValue(localValue);
+        }, 1200);
+
+        return () => {
+            clearTimeout(handler);
+        };
+    }, [localValue]);
+
+    useEffect(() => {
+        onSearch(debouncedValue);
+    }, [debouncedValue, onSearch]);
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = event.target.value;
-        setInputValue(value);
-        onSearch(value);
+        setLocalValue(event.target.value);
     };
 
     const handleClear = () => {
-        setInputValue('');
+        setLocalValue('');
         onClear();
     };
 
@@ -25,10 +43,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onClear }) => {
             <input
                 type="text"
                 placeholder="Digite para localizar a série"
-                value={inputValue}
+                value={localValue}
                 onChange={handleInputChange}
             />
-            <button onClick={handleClear} disabled={!inputValue}>
+            <button onClick={handleClear} disabled={!localValue}>
                 Limpar Pesquisa
             </button>
         </div>
