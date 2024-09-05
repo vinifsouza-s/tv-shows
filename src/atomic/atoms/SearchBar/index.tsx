@@ -42,12 +42,12 @@ const SearchBar: React.FC<SearchBarProps> = ({ inputValue, onSearch, onClear }) 
         <div className="search-bar">
             <input
                 type="text"
-                placeholder="Digite para localizar a série"
+                placeholder="Type to search for the series"
                 value={localValue}
                 onChange={handleInputChange}
             />
             <button onClick={handleClear} disabled={!localValue}>
-                Limpar Pesquisa
+                Clear Search
             </button>
         </div>
     );

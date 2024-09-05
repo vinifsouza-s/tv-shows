@@ -22,11 +22,11 @@ export const fetchSeries = async (query: string = "", page: number = 0) => {
 
     return data.slice(0, 40);
   } catch (error: any) {
-    toast.error(`Erro ao buscar séries: ${error.message}`, {
+    toast.error(`Error fetching series: ${error.message}`, {
       position: "top-right",
       autoClose: 5000,
     });
-    throw new Error(`Erro ao buscar séries: ${error.message}`);
+    throw new Error(`Error fetching series: ${error.message}`);
   }
 };
 
@@ -34,14 +34,14 @@ export const fetchSeriesDetails = async (id: number) => {
   try {
     const response = await fetch(`${API_URL}/shows/${id}?embed=episodes`);
     if (!response.ok) {
-      throw new Error("Erro ao buscar detalhes da série");
+      throw new Error("Error fetching series details");
     }
     return await response.json();
   } catch (error: any) {
-    toast.error(`Erro ao buscar detalhes da série: ${error.message}`, {
+    toast.error(`Error fetching series details: ${error.message}`, {
       position: "top-right",
       autoClose: 5000,
     });
-    throw new Error(`Erro ao buscar detalhes da série: ${error.message}`);
+    throw new Error(`Error fetching series details: ${error.message}`);
   }
 };

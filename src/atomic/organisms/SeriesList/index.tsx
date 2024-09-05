@@ -58,17 +58,17 @@ const SeriesList: React.FC = () => {
                         );
                     })
                 ) : (
-                    !loading && <p>Nenhuma série encontrada para "{searchQuery}"</p>
+                    !loading && <p>No series found for "{searchQuery}"</p>
                 )}
             </div>
 
             <div className="pagination-controls">
                 <Button onClick={handlePrevPage} disabled={currentPage === 0} variant="primary">
-                    Anterior
+                    Previous
                 </Button>
-                <span>Página {currentPage + 1}</span>
+                <span>Page {currentPage + 1}</span>
                 <Button onClick={handleNextPage} variant="primary">
-                    Próxima
+                    Next
                 </Button>
             </div>
 
