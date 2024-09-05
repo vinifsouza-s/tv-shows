@@ -134,4 +134,21 @@ describe('SeriesList Component', () => {
     render(<SeriesList />);
     expect(screen.getByText('Nenhuma série encontrada para ""')).toBeInTheDocument();
   });
+
+  test('deve exibir mensagem de erro quando houver um erro', () => {
+
+    require('../../../hooks/useSeries').useSeries.mockReturnValue({
+      series: [],
+      selectedSeries: null,
+      loading: false,
+      error: 'Mensagem de erro genérica.',
+      handleSeriesClick: jest.fn(),
+      handleCloseModal: jest.fn(),
+    });
+
+
+    render(<SeriesList />);
+
+    expect(screen.getByText('Mensagem de erro genérica.')).toBeInTheDocument();
+  });
 });

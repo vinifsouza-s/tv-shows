@@ -18,7 +18,7 @@ export const useSeries = (searchQuery: string) => {
         const data = await fetchSeries(searchQuery, currentPage);
         setSeries(data);
       } catch (error) {
-        setError(`Error fetching series: ${error}`);
+        setError(`${error}`);
       } finally {
         setLoading(false);
       }
