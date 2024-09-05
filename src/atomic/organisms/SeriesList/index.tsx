@@ -6,6 +6,7 @@ import './styles.scss';
 import SearchBar from '../../atoms/SearchBar';
 import { SeriesProps, SearchResultProps } from '../../../types/Series';
 import Button from '../../atoms/Button';
+import LoadingOverlay from '../../atoms/Loading';
 
 const SeriesList: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -25,18 +26,17 @@ const SeriesList: React.FC = () => {
         setSearchQuery('');
     };
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p className="error-message">{error}</p>;
-
-
-
     return (
         <div className="container">
+            <LoadingOverlay isLoading={loading} />
+
             <SearchBar
                 inputValue={searchQuery}
                 onSearch={setSearchQuery}
                 onClear={handleClearSearch}
             />
+
+            {error && <p className="error-message">{error}</p>}
 
             <div className="series-list">
                 {series.length > 0 ? (
@@ -57,7 +57,7 @@ const SeriesList: React.FC = () => {
                         );
                     })
                 ) : (
-                    <p>Nenhuma série encontrada para "{searchQuery}"</p>
+                    !loading && <p>Nenhuma série encontrada para "{searchQuery}"</p>
                 )}
             </div>
 
