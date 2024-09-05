@@ -1,4 +1,3 @@
-// hooks/useSeries.ts
 import { useState, useEffect } from "react";
 import { fetchSeries, fetchSeriesDetails } from "../services/api";
 import { SeriesProps } from "../types/Series";
@@ -10,11 +9,13 @@ export const useSeries = (searchQuery: string) => {
   );
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState<number>(0);
 
   useEffect(() => {
     const getSeries = async () => {
+      setLoading(true);
       try {
-        const data = await fetchSeries(searchQuery);
+        const data = await fetchSeries(searchQuery, currentPage);
         setSeries(data);
       } catch (error) {
         setError(`Error fetching series: ${error}`);
@@ -24,7 +25,7 @@ export const useSeries = (searchQuery: string) => {
     };
 
     getSeries();
-  }, [searchQuery]);
+  }, [searchQuery, currentPage]);
 
   const handleSeriesClick = async (id: number) => {
     try {
@@ -39,6 +40,14 @@ export const useSeries = (searchQuery: string) => {
     setSelectedSeries(null);
   };
 
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 0));
+  };
+
   return {
     series,
     selectedSeries,
@@ -46,5 +55,8 @@ export const useSeries = (searchQuery: string) => {
     error,
     handleSeriesClick,
     handleCloseModal,
+    currentPage,
+    handleNextPage,
+    handlePrevPage,
   };
 };
