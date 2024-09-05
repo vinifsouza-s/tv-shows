@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import './styles/global.scss';
 import RoutesConfig from './routes';
 import ThemeToggle from './atomic/atoms/ThemeToggle';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const App: React.FC = () => {
@@ -19,6 +21,7 @@ const App: React.FC = () => {
           <ThemeToggle isDarkMode={isDarkMode} onToggle={toggleTheme} />
         </header>
         <main>
+          <ToastContainer />
           <RoutesConfig />
         </main>
       </div>
