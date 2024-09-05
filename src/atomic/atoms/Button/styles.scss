@@ -1,0 +1,42 @@
+// components/atoms/Button/styles.scss
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  background-color: var(--button-color);
+
+  &:hover:not(.disabled) {
+    background-color: var(--hover-color);
+  }
+
+  &:disabled {
+    background-color: var(--disabled-color);
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: var(--disabled-color);
+    }
+  }
+
+  &.secondary {
+    background-color: var(--button-color);
+
+    &:hover:not(.disabled) {
+      background-color: var(--button-color);
+    }
+  }
+
+  &.primary {
+    background-color: var(--button-color);
+    color: var(--text-color);
+
+    &:hover:not(.disabled) {
+      background-color: var(--button-color);
+    }
+  }
+}
