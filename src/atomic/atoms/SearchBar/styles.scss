@@ -5,6 +5,12 @@
   align-items: center;
   margin-bottom: 20px;
 
+  @media (max-width: 425px) {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+
   input {
     flex: 1;
     padding: 8px;
@@ -14,6 +20,10 @@
     margin-right: 8px;
     color: var(--text-color);
     background-color: var(--primary-color);
+
+    &::placeholder {
+      color: var(--text-color);
+    }
   }
 
   button {

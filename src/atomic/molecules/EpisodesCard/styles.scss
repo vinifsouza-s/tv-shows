@@ -1,9 +1,11 @@
+@import "../../../styles/themes";
+
 .episode-item {
   align-items: center;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  background-color: #ffffffbe;
+  background-color: var(--card-background);
   box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
   padding: 1rem;
   border-radius: 4px;
@@ -17,10 +19,15 @@
   .episode-info {
     h4 {
       margin: 0;
+      color: var(--primary-color);
+      font-weight: 800;
+      font-size: 1.4rem;
     }
 
     p {
       margin: 5px 0;
+      color: var(--primary-color);
+      font-size: 1rem;
     }
   }
 }
