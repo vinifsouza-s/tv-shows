@@ -1,6 +1,6 @@
 # TVmaze Series Viewer
 
-O TVmaze Series Viewer é uma aplicação React que permite buscar, visualizar e explorar séries de TV utilizando a API do TVmaze. Inclui funcionalidades de pesquisa, visualização de detalhes das séries e gerenciamento de temas (claro e escuro).
+O TVmaze Series Viewer é uma aplicação React que permite buscar, visualizar e explorar séries de TV utilizando a API do TVmaze. Inclui funcionalidades de pesquisa, visualização de detalhes das séries por temporadas.
 
 ## 🚀 Começando
 
