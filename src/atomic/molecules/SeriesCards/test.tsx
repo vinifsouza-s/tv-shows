@@ -1,5 +1,3 @@
-// src/components/SeriesItem.test.tsx
-
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import SeriesCards from './';
@@ -19,17 +17,17 @@ describe('SeriesCards Component', () => {
         render(<SeriesCards series={mockSeries} onClick={mockOnClick} />);
     });
 
-    it('deve renderizar uma imagem', () => {
+    it('should render an image', () => {
         const imgElement = screen.getByRole('img');
         expect(imgElement).toBeInTheDocument();
     });
 
-    it('deve renderizar um texto', () => {
+    it('should render a text', () => {
         const h2Element = screen.getByRole('heading', { level: 2 });
         expect(h2Element).toBeInTheDocument();
     });
 
-    it('deve chamar a função onClick quando a div é clicada', () => {
+    it('should call the onClick function when the div is clicked', () => {
         const divElement = screen.getByText(mockSeries.name).closest('div');
         expect(divElement).toBeInTheDocument();
         fireEvent.click(divElement!);

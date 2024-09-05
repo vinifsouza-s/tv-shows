@@ -1,7 +1,5 @@
-
 import { render, screen } from '@testing-library/react';
 import SeriesDetailsModal from './index';
-
 
 jest.mock('../../atoms/Modal', () => ({
     __esModule: true,
@@ -33,7 +31,7 @@ describe('SeriesDetailsModal Component', () => {
         }
     };
 
-    test('deve renderizar o modal com detalhes da série', () => {
+    test('should render the modal with series details', () => {
         render(
             <SeriesDetailsModal
                 isOpen={true}
@@ -42,19 +40,14 @@ describe('SeriesDetailsModal Component', () => {
             />
         );
 
-
         expect(screen.getByText(/Test Series/i)).toBeInTheDocument();
         expect(screen.getByText(/Test summary with HTML/i)).toBeInTheDocument();
         expect(screen.getByText(/Test Genre/i)).toBeInTheDocument();
-
-
-
-
         expect(screen.getByText(/Test Episode 1/i)).toBeInTheDocument();
         expect(screen.getByText(/Test Episode 2/i)).toBeInTheDocument();
     });
 
-    test('deve chamar onClose ao clicar no botão de fechar', () => {
+    test('should call onClose when the close button is clicked', () => {
         const onClose = jest.fn();
 
         render(
@@ -65,8 +58,5 @@ describe('SeriesDetailsModal Component', () => {
             />
         );
 
-
     });
-
-
 });

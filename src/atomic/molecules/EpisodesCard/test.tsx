@@ -1,15 +1,12 @@
-
 import { render, screen } from '@testing-library/react';
 import EpisodeItemCard from './';
 import { EpisodeProps } from '../../../types/Episode';
-
 
 export const stripHtmlTags = (html: string): string => {
     const temporalDivElement = document.createElement('div');
     temporalDivElement.innerHTML = html;
     return temporalDivElement.textContent || temporalDivElement.innerText || '';
 };
-
 
 const mockEpisode: EpisodeProps = {
     id: 1,
@@ -22,49 +19,48 @@ const mockEpisode: EpisodeProps = {
 };
 
 describe('stripHtmlTags', () => {
-    test('deve remover todas as tags HTML de uma string', () => {
+    test('should remove all HTML tags from a string', () => {
         const htmlString = '<div><p>Hello <b>world</b></p></div>';
         const result = stripHtmlTags(htmlString);
         expect(result).toBe('Hello world');
     });
 
-    test('deve retornar uma string vazia quando não houver conteúdo HTML', () => {
+    test('should return an empty string when there is no HTML content', () => {
         const htmlString = '';
         const result = stripHtmlTags(htmlString);
         expect(result).toBe('');
     });
 
-    test('deve retornar uma string vazia para HTML sem texto', () => {
+    test('should return an empty string for HTML with no text', () => {
         const htmlString = '<div><b></b></div>';
         const result = stripHtmlTags(htmlString);
         expect(result).toBe('');
     });
 
-    test('deve lidar com conteúdo de texto sem tags HTML', () => {
+    test('should handle plain text without HTML tags', () => {
         const htmlString = 'Just plain text';
         const result = stripHtmlTags(htmlString);
         expect(result).toBe('Just plain text');
     });
 });
 
-
 describe('EpisodeItemCard Component', () => {
-    test('deve renderizar a imagem do episódio', () => {
+    test('should render the episode image', () => {
         render(<EpisodeItemCard episode={mockEpisode} />);
         expect(screen.getByRole('img')).toHaveAttribute('src', 'image-url');
     });
 
-    test('deve renderizar o nome e número da temporada do episódio', () => {
+    test('should render the episode name and season number', () => {
         render(<EpisodeItemCard episode={mockEpisode} />);
         expect(screen.getByText('1-1 Episode Name')).toBeInTheDocument();
     });
 
-    test('deve renderizar o resumo do episódio sem tags HTML', () => {
+    test('should render the episode summary without HTML tags', () => {
         render(<EpisodeItemCard episode={mockEpisode} />);
         expect(screen.getByText('This is a summary of the episode.')).toBeInTheDocument();
     });
 
-    test('deve renderizar o texto "Runtime:" no tempo de execução do episódio', () => {
+    test('should render the text "Runtime:" in the episode runtime', () => {
         render(<EpisodeItemCard episode={mockEpisode} />);
         expect(screen.getByText(/Runtime:/)).toBeInTheDocument();
     });

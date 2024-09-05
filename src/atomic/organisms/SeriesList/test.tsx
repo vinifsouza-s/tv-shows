@@ -8,11 +8,11 @@ jest.mock('../../../hooks/useSeries', () => ({
 }));
 
 describe('SeriesList Component', () => {
-  test('deve renderizar a lista de séries', () => {
+  test('should render the series list', () => {
     const mockSeries: (SeriesProps | SearchResultProps)[] = [
       {
         id: 1,
-        name: 'Serie A',
+        name: 'Series A',
         summary: 'Summary A',
         premiered: '2020-01-01',
         genres: ['Drama'],
@@ -22,7 +22,7 @@ describe('SeriesList Component', () => {
       },
       {
         id: 2,
-        name: 'Serie B',
+        name: 'Series B',
         summary: 'Summary B',
         premiered: '2021-02-01',
         genres: ['Comedy'],
@@ -46,7 +46,7 @@ describe('SeriesList Component', () => {
     expect(screen.getAllByRole('img').length).toBeGreaterThan(0);
   });
 
-  test('deve exibir "Loading..." enquanto os dados estão sendo carregados', () => {
+  test('should display "Loading..." while data is being loaded', () => {
     require('../../../hooks/useSeries').useSeries.mockReturnValue({
       series: [],
       selectedSeries: null,
@@ -60,9 +60,9 @@ describe('SeriesList Component', () => {
     expect(screen.getByTestId('loading-overlay')).toBeInTheDocument();
   });
 
-  test('deve não exibir "Loading..." quando o carregamento está completo', () => {
+  test('should not display "Loading..." when loading is complete', () => {
     require('../../../hooks/useSeries').useSeries.mockReturnValue({
-      series: [{ id: 1, name: 'Serie A', image: { medium: 'image-url' } }] as SeriesProps[],
+      series: [{ id: 1, name: 'Series A', image: { medium: 'image-url' } }] as SeriesProps[],
       selectedSeries: null,
       loading: false,
       error: null,
@@ -74,24 +74,24 @@ describe('SeriesList Component', () => {
     expect(screen.queryByTestId('loading-overlay')).not.toBeInTheDocument();
   });
 
-  test('deve exibir mensagem de erro quando houver um erro', () => {
+  test('should display an error message when there is an error', () => {
     require('../../../hooks/useSeries').useSeries.mockReturnValue({
       series: [],
       selectedSeries: null,
       loading: false,
-      error: 'Mensagem de erro genérica.',
+      error: 'Generic error message.',
       handleSeriesClick: jest.fn(),
       handleCloseModal: jest.fn(),
     });
 
     render(<SeriesList />);
-    expect(screen.getByText('Mensagem de erro genérica.')).toBeInTheDocument();
+    expect(screen.getByText('Generic error message.')).toBeInTheDocument();
   });
 
-  test('deve exibir o modal de detalhes da série quando uma série estiver selecionada', () => {
+  test('should display the series details modal when a series is selected', () => {
     const mockSelectedSeries: SeriesProps = {
       id: 1,
-      name: 'Serie C',
+      name: 'Series C',
       image: { medium: 'image-url' },
       ended: false,
       _embedded: { episodes: [] },
@@ -102,7 +102,7 @@ describe('SeriesList Component', () => {
 
     require('../../../hooks/useSeries').useSeries.mockReturnValue({
       series: [
-        { id: 1, name: 'Serie C', image: { medium: 'image-url' }, ended: false, _embedded: { episodes: [] } }
+        { id: 1, name: 'Series C', image: { medium: 'image-url' }, ended: false, _embedded: { episodes: [] } }
       ],
       selectedSeries: mockSelectedSeries,
       loading: false,
@@ -117,12 +117,12 @@ describe('SeriesList Component', () => {
     expect(container.querySelector('.modal-content')).toBeInTheDocument();
   });
 
-  test('deve chamar handleSeriesClick ao clicar em um cartão de série', () => {
+  test('should call handleSeriesClick when a series card is clicked', () => {
     const handleSeriesClick = jest.fn();
 
     require('../../../hooks/useSeries').useSeries.mockReturnValue({
       series: [
-        { id: 1, name: 'Serie D', image: { medium: 'image-url' }, ended: false, _embedded: { episodes: [] } }
+        { id: 1, name: 'Series D', image: { medium: 'image-url' }, ended: false, _embedded: { episodes: [] } }
       ],
       selectedSeries: null,
       loading: false,
@@ -136,7 +136,7 @@ describe('SeriesList Component', () => {
     expect(handleSeriesClick).toHaveBeenCalledWith(1);
   });
 
-  test('deve renderizar mensagem quando não há séries após a pesquisa', () => {
+  test('should render a message when no series are found after search', () => {
     require('../../../hooks/useSeries').useSeries.mockReturnValue({
       series: [],
       selectedSeries: null,
@@ -147,15 +147,15 @@ describe('SeriesList Component', () => {
     });
 
     render(<SeriesList />);
-    expect(screen.getByText('Nenhuma série encontrada para ""')).toBeInTheDocument();
+    expect(screen.getByText('No series found for ""')).toBeInTheDocument();
   });
 
-  test('deve renderizar a imagem padrão quando a imagem da série não está disponível', () => {
+  test('should render the default image when the series image is not available', () => {
     require('../../../hooks/useSeries').useSeries.mockReturnValue({
       series: [
         {
           id: 3,
-          name: 'Serie E',
+          name: 'Series E',
           summary: 'Summary E',
           premiered: '2022-03-01',
           genres: ['Action'],
@@ -172,6 +172,6 @@ describe('SeriesList Component', () => {
     });
 
     render(<SeriesList />);
-    expect(screen.getByAltText('Serie E')).toHaveAttribute('src', defaultImage);
+    expect(screen.getByAltText('Series E')).toHaveAttribute('src', defaultImage);
   });
 });
