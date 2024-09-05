@@ -25,15 +25,32 @@
     width: 300px;
     background-color: var(--background-color);
     color: var(--text-color);
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
   }
 }
 
 .series-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
   gap: 2rem;
   max-width: 75rem;
   padding: 1rem;
+
+  grid-template-columns: repeat(5, 1fr);
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 425px) {
+    grid-template-columns: 1fr;
+  }
 
   .series-item {
     width: 100%;
@@ -45,6 +62,7 @@
 
     img {
       border-radius: 1rem;
+      max-width: 100%;
     }
 
     &:hover {
