@@ -5,7 +5,7 @@ import { stripHtmlTags } from '../../../utils/scriptHtml';
 import EpisodeItemCard from '../EpisodesCard';
 import { EpisodeProps } from '../../../types/Episode';
 import { SeriesProps } from '../../../types/Series';
-
+import defaultImage from '../../../assets/image/No_image_available.svg.png';
 
 interface SeriesDetailsModalProps {
     isOpen: boolean;
@@ -33,13 +33,17 @@ const SeriesDetailsModal: React.FC<SeriesDetailsModalProps> = ({ isOpen, onClose
     const getEpisodesForSeason = (season: number): EpisodeProps[] => {
         return series._embedded?.episodes.filter((episode: EpisodeProps) => episode.season === season);
     };
+
+
+    const imageUrl = series?.image?.original || defaultImage;
+
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
             <div className="series-details-modal">
                 <button className="close-button" onClick={onClose} aria-label="Close modal">&times;</button>
                 <h2>{series.name}</h2>
                 <div className='divider_header'>
-                    <img src={series.image.original} alt={series.name} className='primary_image' />
+                    <img src={imageUrl} alt={series.name || 'Imagem da série'} className='primary_image' />
                     <div className='sumary'>
                         <p>{stripHtmlTags(series.summary)}</p>
                         <p><strong>Premiere:</strong> {series.premiered}</p>

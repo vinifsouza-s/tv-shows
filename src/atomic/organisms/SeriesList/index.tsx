@@ -6,6 +6,7 @@ import './styles.scss';
 import SearchBar from '../../atoms/SearchBar';
 import { SeriesProps, SearchResultProps } from '../../../types/Series';
 import Button from '../../atoms/Button';
+import defaultImage from '../../../assets/image/No_image_available.svg.png';
 import LoadingOverlay from '../../atoms/Loading';
 
 const SeriesList: React.FC = () => {
@@ -49,7 +50,7 @@ const SeriesList: React.FC = () => {
                                     id: show.id,
                                     name: show.name,
                                     image: {
-                                        medium: show.image?.medium || 'default-image-url'
+                                        medium: show.image?.medium || defaultImage
                                     },
                                 }}
                                 onClick={() => handleSeriesClick(show.id)}
