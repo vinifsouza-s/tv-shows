@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import SeriesList from './index';
 import { SeriesProps, SearchResultProps } from '../../../types/Series';
+import defaultImage from '../../../assets/image/No_image_available.svg.png';
 
 jest.mock('../../../hooks/useSeries', () => ({
   useSeries: jest.fn(),
@@ -147,5 +148,30 @@ describe('SeriesList Component', () => {
 
     render(<SeriesList />);
     expect(screen.getByText('Nenhuma série encontrada para ""')).toBeInTheDocument();
+  });
+
+  test('deve renderizar a imagem padrão quando a imagem da série não está disponível', () => {
+    require('../../../hooks/useSeries').useSeries.mockReturnValue({
+      series: [
+        {
+          id: 3,
+          name: 'Serie E',
+          summary: 'Summary E',
+          premiered: '2022-03-01',
+          genres: ['Action'],
+          image: {},
+          ended: false,
+          _embedded: { episodes: [] }
+        }
+      ],
+      selectedSeries: null,
+      loading: false,
+      error: null,
+      handleSeriesClick: jest.fn(),
+      handleCloseModal: jest.fn(),
+    });
+
+    render(<SeriesList />);
+    expect(screen.getByAltText('Serie E')).toHaveAttribute('src', defaultImage);
   });
 });

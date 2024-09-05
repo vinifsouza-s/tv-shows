@@ -1,4 +1,3 @@
-// jest.config.js
 module.exports = {
   preset: "ts-jest",
   setupFilesAfterEnv: ["<rootDir>/src/setupTests.ts"],
@@ -8,9 +7,10 @@ module.exports = {
   transform: {
     "^.+\\.(ts|tsx)$": "ts-jest",
     "^.+\\.(js|jsx)$": "babel-jest",
-    "^.+\\.(scss|css)$": "jest-transform-stub", // Adiciona esta linha
+    "^.+\\.(scss|css)$": "jest-transform-stub",
   },
   moduleNameMapper: {
-    "\\.(scss|css)$": "identity-obj-proxy", // Adiciona esta linha para mockar arquivos CSS/SCSS
+    "\\.(scss|css)$": "identity-obj-proxy",
+    "\\.(png|jpg|jpeg|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
   },
 };
