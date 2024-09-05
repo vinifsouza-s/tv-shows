@@ -56,7 +56,21 @@ describe('SeriesList Component', () => {
     });
 
     render(<SeriesList />);
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
+    expect(screen.getByTestId('loading-overlay')).toBeInTheDocument();
+  });
+
+  test('deve não exibir "Loading..." quando o carregamento está completo', () => {
+    require('../../../hooks/useSeries').useSeries.mockReturnValue({
+      series: [{ id: 1, name: 'Serie A', image: { medium: 'image-url' } }] as SeriesProps[],
+      selectedSeries: null,
+      loading: false,
+      error: null,
+      handleSeriesClick: jest.fn(),
+      handleCloseModal: jest.fn(),
+    });
+
+    render(<SeriesList />);
+    expect(screen.queryByTestId('loading-overlay')).not.toBeInTheDocument();
   });
 
   test('deve exibir mensagem de erro quando houver um erro', () => {
@@ -133,22 +147,5 @@ describe('SeriesList Component', () => {
 
     render(<SeriesList />);
     expect(screen.getByText('Nenhuma série encontrada para ""')).toBeInTheDocument();
-  });
-
-  test('deve exibir mensagem de erro quando houver um erro', () => {
-
-    require('../../../hooks/useSeries').useSeries.mockReturnValue({
-      series: [],
-      selectedSeries: null,
-      loading: false,
-      error: 'Mensagem de erro genérica.',
-      handleSeriesClick: jest.fn(),
-      handleCloseModal: jest.fn(),
-    });
-
-
-    render(<SeriesList />);
-
-    expect(screen.getByText('Mensagem de erro genérica.')).toBeInTheDocument();
   });
 });
